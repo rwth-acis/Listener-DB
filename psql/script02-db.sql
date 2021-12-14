@@ -355,7 +355,6 @@ BEGIN
 	EXECUTE 'INSERT INTO model.game_data VALUES(''test'', ''GF'', ''GamificationTest'')';
 	EXECUTE 'INSERT INTO model.action_data VALUES(''staction1'', ''GF1'', ''Action for GF Test'',1, false, ''some text'')';
 	EXECUTE 'INSERT INTO listen.action_info VALUES(''testConfig'', ''test'', ''staction1'', ''Gamification'')';
-	EXECUTE 'INSERT INTO listener.times VALUES(''testConfig'', ''2021-11-28'', ''12:13'')';
 END;
 $BODY$
 LANGUAGE plpgsql VOLATILE;
