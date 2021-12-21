@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels: 
+    app: listener-db
+  name: listener-db-deployment
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: listener-db
+  template: 
+    metadata: 
+      labels: 
+        app: listener-db
+    spec: 
+      containers: 
+        - 
+          image: registry.tech4comp.dbis.rwth-aachen.de/rwthacis/listener-db
+          name: listener-db
+          volumeMounts:
+            - mountPath: "/var/lib/postgresql/data"
+              name: listener-db-volume
+          ports: 
+            - 
+              containerPort: 5432
+          env:
+            - name: PGDATA
+              value: /pgdata
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: listener-db-secret
+                  key: password
+      volumes:
+        - name: listener-db-volume
+          persistentVolumeClaim:
+            claimName: listener-db-claim
